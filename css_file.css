@@ -1,0 +1,285 @@
+.side{
+    background-color: #23282D;
+    position: fixed;
+    height: 100%;
+    left:0;
+    top: 0;
+    width: 200px;
+    text-align: left;
+    padding-top: 50px; 
+}
+
+div.sidebar-link{
+    background-color: #23282D;
+    height: 30px; 
+}
+
+div.sidebar-link a:hover{
+    color: #80dfff;
+    background-color: #1a1a1a;
+    background-position: center;
+}
+
+.side a{
+    display: block;
+    color: #EEEEEE;
+    font-family: Futura, sans-serif; 
+    text-decoration: none;
+    padding-top:7px;
+    padding-bottom: 7px;
+    padding-left: 20px;
+}
+
+
+.head{
+    background-color: #23282D;
+    position: fixed;
+    left: 200px;
+    top: 0;
+    color: white;
+    width: 100%;
+    height: 30px;
+    padding-top: 10px;
+}
+
+.head a{
+    color: #EEEEEE;
+    text-decoration: none;
+    font-family: sans-serif;
+    text-align: center;
+    background-size:20px 20px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+}
+
+.head a:hover{ 
+    color: #80dfff;
+    background-color: #666666; 
+    /* background-color: #808080; */
+}
+
+.wrap{
+    padding: 65px 30px 30px 240px;
+    background-color: #f2f2f2;
+
+}
+
+._wrap{
+    padding: 1px 30px 30px 240px;
+    background-color: #f2f2f2;
+
+}
+
+.title{
+    padding-bottom: 12px;
+    padding-left: 14px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.title2{
+    padding-bottom: 7px;
+    padding-left: 14px;
+}
+
+input[type=text]{
+    font-size: 16px;
+    padding: 7px 20px 7px 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 9px;   
+}
+
+.search_bar{
+    background-image: url(./images/search.png);
+    background-position: 8px 5px;   
+    background-repeat: no-repeat;
+    width: 30%;
+    padding: 10px 20px 5px 40px;  
+}
+
+input[type=text].search_bar{
+    font-size: 16px;
+    padding: 7px 20px 7px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 9px;   
+}
+
+table{
+    border:1px solid #e6e6e6;
+    border-spacing:0px;
+    width: 90%;
+}
+
+td {
+    border: 0;
+}
+
+.edit{
+    display: none;
+    padding-top: 5px;
+}
+
+.edit a{
+    text-decoration: none;
+    color: #0073AA;
+    
+}
+
+.min{
+    background-color:#ff8080;
+}
+.min:nth-child(even){
+    background-color:#ff8080;
+}
+.min:hover{
+    background-color:#ff4d4d;
+}
+.min:hover .edit{
+    background-color:#ff4d4d;
+    display: block;    
+    cursor: pointer;
+}
+
+
+.trhover:hover {
+    background-color:#c1d7d7;
+}
+
+.trhover:hover .edit{
+    background-color:#c1d7d7;
+    display: block;    
+    cursor: pointer;
+}
+
+
+tr:nth-child(even){
+    background-color: white;
+}
+
+.notfirst{
+    background-color: #f2f2f2;
+}
+
+li{
+    list-style-type: none;
+}
+
+.addbutton{       
+    font-size: 16px;
+    padding: 10px 12px 6px 12px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    background-color:white;
+    margin-left: 30px;
+    font-weight: 500;
+}
+.addbutton:hover{
+    background-color:#c1d7d7;
+}
+
+.addbutton2{       
+    font-size: 16px;
+    padding: 6px 18px 6px 18px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    background-color:white;
+    font-weight: 500;
+}
+
+.addbutton2:hover{
+    background-color:#c1d7d7;
+}
+
+.delete_button{       
+    font-size: 16px;
+    padding: 6px 18px 6px 18px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    background-color:#ff6666;
+    font-weight: 500;
+}
+
+.delete_button:hover{
+    background-color:#ff3333;
+}
+
+select{
+    border: 1px solid #ddd;
+    padding: 7px 20px 7px 7px;
+    border: 1px solid #ddd;
+    margin-bottom: 9px;   
+    background-color: white;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 200px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #f2f2f2;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.myBtn{
+    cursor: pointer;
+}
+
+.load_text{
+    display: none;
+}
+
+.load{
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #a2c3c3;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.active{
+    background-color: #007ab3;
+}
+
+
+
+
+
+
+
