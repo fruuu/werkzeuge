@@ -38,7 +38,7 @@ catch (Exception $ex) {
     </tr>
 
     <tr style='background-color: #f2f2f2;'>
-        <td> Password </td>  <td> <input type='text' name='password' > </td>  
+        <td> Password </td>  <td> <input type='password' name='password' > </td>  
     </tr>
     <tr style='background-color: #f2f2f2;'>
         <td> Database host </td>  <td> <input type='text' name='host' > </td>

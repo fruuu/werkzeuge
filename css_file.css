@@ -82,7 +82,7 @@ div.sidebar-link a:hover{
     padding-left: 14px;
 }
 
-input[type=text]{
+input[type=text], input[type=password]{
     font-size: 16px;
     padding: 7px 20px 7px 10px;
     border: 1px solid #ddd;

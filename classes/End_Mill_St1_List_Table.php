@@ -2,13 +2,6 @@
 
 
 class End_Mill_St1_List_Table extends List_Table{  
-    
-    protected $title;
-    protected $id;
-    protected $query_columns;
-    protected $headers;
-    protected $sortable_column_headers;
-    protected $items;
 
     public function __construct() {
         

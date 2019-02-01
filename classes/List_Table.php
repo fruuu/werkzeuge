@@ -8,25 +8,29 @@ class List_Table {
     protected $_column_headers;
     public $table_width;
     public $print_edit; //if true, hover edit link is shown
-    private $id;
-    private $col_key; // $_GET name for ASC or DESC sort
-    public $type;
+    private $col_key; // $_GET name for ASC or DESC sort       
+    protected $title;
+    protected $id;
+    protected $query_columns;
+    protected $headers;
+    protected $sortable_column_headers;
+    protected $items;
     
     public function __construct() {
-       //$this->set_screen();
+
     }
     
-    function get_columns(){
+    private function get_columns(){
         //from Drill_List_1, Drill_List2, Mills_List_Table1, Mills_List_Table2, 
         //headers are hardcoded for now
         return $this->query_columns;
     }
     
-    function get_headers(){
+    private function get_headers(){
         return $this->headers;
     }
    
-    function get_sortable_columns(){
+    private function get_sortable_columns(){
         //from Drill_List_1, Drill_List2, Mills_List_Table1, Mills_List_Table2 
         //headers are hardcoded for now
         if(isset($this->sortable_column_headers)){
@@ -36,7 +40,7 @@ class List_Table {
         
     }
     
-    function get_column_info(){
+    private function get_column_info(){
         
         $columns = $this->get_columns();
         $headers = $this->get_headers();
@@ -127,7 +131,6 @@ class List_Table {
             echo "</table>";
             $this->no_items();
         }
-        
     }   
     
     private function handle_row($item){
@@ -249,7 +252,7 @@ class List_Table {
         <?php
     }
     
-    public function no_items(){
+    private function no_items(){
         echo "<br> Nema artikala ";
     }
      

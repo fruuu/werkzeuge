@@ -99,36 +99,12 @@ class db{
         }
         
     }
-    
-    public function get_var(){
-        
-        //$wpdb->get_var($wpdb->prepare());
-         echo "get var";
-        
-    }
-    
-    
-    public function get_row(){
-        
-    }
-    
-    public function get_col(){
-        
-    }
-    
-    public function get_count(){
-        
-        
-    }
+
     
     public function bail($message){
         if(class_exists("Error")){
             $this->errors = new Error($message);
         }
-    }
-    
-    public function test(){
-        echo "test";
     }
     
     
