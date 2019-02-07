@@ -10,15 +10,15 @@ class Gauge_List_Table extends List_Table{
     protected $sortable_column_headers;
     protected $items;
        
-    public function __construct() {
+    public function __construct($title, $table) {
         
-        $this->screen = "gauges";
+        $this->screen = $table;
         $this->set_query__columns();
         $this->set_sortable_columns();
         $this->set_headers();
         $this->prepare_items();
         $this->print_add_button();
-        $this->title = "Kontrolni trnovi";
+        $this->title = $title;
         $this->table_width = "1400px";
     }
     
@@ -40,7 +40,7 @@ class Gauge_List_Table extends List_Table{
     
     protected function set_query__columns(){
         
-        $this->query_columns = array("id", "diameter", "type", "pieces", "place", "note");
+        $this->query_columns = array("id", "diameter", "category", "pieces", "place", "note");
     }  
     
     public function print_add_button(){

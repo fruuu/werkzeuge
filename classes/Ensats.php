@@ -3,15 +3,15 @@
 
 class Ensats extends Bolt{
     
-    public function __construct($screen, $title) {
+    public function __construct($title, $table, $type=null) {
         
-        $this->screen = $screen;
+        $this->screen = $table;
         $this->title = $title;
         $this->set_query__columns();
         $this->set_headers();
         $this->type = "Ensat";
         $this->table_width = "1000";
-        $this->prepare_items();
+        $this->prepare_items("type", $type);
         $this->display();
         $this->print_edit = true;
     }
@@ -30,6 +30,10 @@ class Ensats extends Bolt{
     protected function set_query__columns(){
         
         $this->query_columns = array("id", "name", "diameter", "length", "pieces", "price", "min");
+    } 
+    
+    public function print_add_button(){    
+        //no add button in Gauge and Thread Gauge
     } 
     
     

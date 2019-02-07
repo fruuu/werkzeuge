@@ -11,13 +11,14 @@ class List_Table {
     private $col_key; // $_GET name for ASC or DESC sort       
     protected $title;
     protected $id;
+    protected $type = null;
     protected $query_columns;
     protected $headers;
     protected $sortable_column_headers;
     protected $items;
     
     public function __construct() {
-
+        
     }
     
     private function get_columns(){
@@ -62,7 +63,6 @@ class List_Table {
         
         list($columns, $headers, $sortable) = $this->get_column_info();
 
-        $current_url = "";
         $img = "<img src='../images/sort.png'>";
         echo "<table width=$this->table_width px class='order-table' id='table_data'>";
         echo "<thead style='background-color:white'> <tr>";
@@ -88,7 +88,7 @@ class List_Table {
         
     }
     
-        public function prepare_items($column = null, $value = null){      
+        public function prepare_items($condition = null, $con_value = null){      
 
         $columns = $this->get_columns();
         if(isset($this->col_key)){
@@ -96,7 +96,7 @@ class List_Table {
         }
         
         $query = new Query();
-        $this->items = $query->get_items($this->screen, $columns, $column, $value, $this->col_key);
+        $this->items = $query->get_items($this->screen, $columns, $condition, $con_value, $this->col_key);
         /*
         echo "<pre>";
             print_r($this->items);
@@ -158,7 +158,7 @@ class List_Table {
     
     public function print_add_button(){
         
-        echo "<a href='?type=$this->screen' style='text-decoration:none'><input type='button' name='button' value='Dodaj novi' class='addbutton'></a>";    
+        echo "<a href='?add=$this->screen' style='text-decoration:none'><input type='button' name='button' value='Dodaj novi' class='addbutton'></a>";    
     } 
 
         
@@ -179,10 +179,14 @@ class List_Table {
         $this->print_title();
         echo "</div>";
         
-        if(isset($_GET['type'])){
+        if(isset($_GET['add'])){
             $this->add_item();
         }
         else{
+            
+            if(isset($_GET['id'])){
+                $this->edit_item();
+            }
             
             echo "<div class=title2>";
             $this->print_search_bar();
@@ -195,67 +199,21 @@ class List_Table {
         echo "</div>";       
     }
     
-    public function add_item($type = null){
+    public function add_item(){
         
-        if(isset($_POST['diameter'])){
-            if($type == "Bolt"){
-                $_POST['diameter']  = "M". $_POST['diameter'];
-            }
-        }
-               
-        $add_item = new Add_Item($type);
-        $add_item->table = $this->screen;
-
-        foreach($_POST as $k => $v){
-            $add_item->items[$k] = $v;
-        }
+        $add_item = new Add_Item($this->screen, $this->type);   
         
-        if(empty($add_item->items['pieces'])){
-            $add_item->items['pieces'] = "";
-        }
-
-        if(isset($_POST['submit'])){
-            $this->redirect();
-            $add_item->set_data(); 
-        }
-         
     }
     
-    public function edit_item($cols, $type){
+    public function edit_item(){
         
-        if(isset($_POST['diameter'])){
-            if($type == "Bolt"){
-                $_POST['diameter']  = "M". $_POST['diameter'];
-            }
-        }
-               
-        $edit_item = new Edit_Item($this->screen, $_GET['id'], $cols, $type);
-        
-        foreach($_POST as $k => $v){
+        $id = $_GET['id'];               
+        $edit_item = new Edit_Item($this->screen, $this->query_columns, $id);
 
-            $edit_item->items[$k] = $v;
-        }        
-
-        
-        if(isset($_POST['edit']) || isset($_POST['delete'])){
-            $this->redirect();
-            $edit_item->set_data();        
-        }
-    }
-    
-    private function redirect(){
-        $this->url = strtok($_SERVER["REQUEST_URI"],'?');
-        ?>
-            <script type="text/javascript">
-                window.location = "<?php echo $this->url ?>";
-            </script>   
-        <?php
     }
     
     private function no_items(){
         echo "<br> Nema artikala ";
     }
-     
-    
-    
+  
 }

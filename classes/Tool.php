@@ -15,6 +15,7 @@ class Tool {
     public $place;
     public $note;
     public $min;
+    public $type;
     
     
     public function __construct() {

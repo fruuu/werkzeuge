@@ -11,7 +11,7 @@ class Query {
         $this->count = 0;
     }   
         
-    public function get_items($table, $columns, $column = null, $value = null){
+    public function get_items($table, $columns, $condition = null, $con_value = null){
             
         if($this->count != 0){
         }                          
@@ -26,12 +26,13 @@ class Query {
                     $query = "select $col from $table order by $orderby $sort";        
             }
 
-            else if($column == null || $value == null){                
+            else if($condition == null || $con_value == null){                
                 $query = "select $col from $table order by cast(diameter as unsigned), diameter";
             }
             else{
-                $query = "select $col from $table where $column='$value' order by length(diameter), diameter";
+                $query = "select $col from $table where $condition='$con_value' order by length(diameter), diameter";
             }
+            
             if($this->result = $db->select($query)){
                 while($row = $this->result->fetch_object()){
                 $item = new Tool();
@@ -41,7 +42,7 @@ class Query {
                 array_push($this->items, $item);
                 }
             }
-            
+            //print_r($this->items);
             return $this->items;
         }
     }      
@@ -70,9 +71,8 @@ class Query {
                
         $cols = implode(",", $columns);
         $query = "insert into $table ($cols) values ($values)";
-        
+
         $db = new db();
-        
         $db->insert($query, $tmp);       
     }   
     

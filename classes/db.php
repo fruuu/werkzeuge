@@ -61,7 +61,7 @@ class db{
     public function select($query){
         
         if($this->db_select_error == false){
-            $stmt = @$this->dbh->prepare($query);
+            $stmt = $this->dbh->prepare($query);
             $stmt->execute();
             $res = $stmt->get_result();
             return $res;

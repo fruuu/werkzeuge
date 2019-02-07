@@ -5,18 +5,21 @@ class Edit_Item {
     public $table;
     public $items;
     public $id;
+    private $query_columns;
     private $columns = array();
     private $values = array();
     private $get_values;
     private $type;
     
-    public function __construct($table, $id, $itemss, $type) {
+    public function __construct($table, $query_columns, $id) {
         
         $this->table = $table;
         $this->id = $id;
-        $this->type = $type;
-        $this->get_items($this->table, $this->id, $itemss);
-        if($type == "Bolt" || $type == "Ensat"){
+        $this->query_columns = $query_columns;
+        
+        $this->get_items($this->table, $this->query_columns, $this->id);
+        
+        if($this->table != "drills" && $this->table != "drills_indexable" && $this->table != "reamers" && $this->table != "taps"){
             $this->print_modal_form();
         }
         else{
@@ -26,17 +29,28 @@ class Edit_Item {
     
     public function set_data(){
         
-        array_pop($this->items);
-        foreach($this->items as $k => $v){
-            $this->columns[] = $k;
-            $this->values[] = sanitize($v);            
-        }
-        
         if(isset($_POST['edit'])){
+            
+            if($this->table != "drills" && $this->table != "drills_indexable" && $this->table != "reamers" && $this->table != "taps"){
+                $_POST['diameter']  = "M". $_POST['diameter'];
+            }
+            
+            foreach($_POST as $k => $v){
+                $this->items[$k] = $v;
+            }
+            
+            array_pop($this->items);
+            foreach($this->items as $k => $v){
+                $this->columns[] = $k;
+                $this->values[] = sanitize($v);            
+            }
+
             $this->update_items($this->table, $this->columns, $this->values, $this->id);
+            redirect();
         }
         if(isset($_POST['delete'])){
             $this->delete_items($this->table, $this->id);
+            redirect();
         }
         
     }  
@@ -53,22 +67,18 @@ class Edit_Item {
         $query->delete_items($table, $id);
     }
     
-    private function get_items($table, $value, $itemss){
+    private function get_items($table, $query_columns, $id){
         
         $query = new Query();
-        $this->get_values = $query->get_items($table, $itemss, "id", $value);
-        if($this->type == "Bolt" || $this->type == "Ensat"){
+        $this->get_values = $query->get_items($table, $query_columns, "id", $id);
+        if($this->table != "drills" && $this->table != "drills_indexable" && $this->table != "reamers" && $this->table != "taps"){
             $this->get_values[0]->diameter = substr($this->get_values[0]->diameter, 1); 
         }
-        
-
     }
     
     
     private function print_modal_form(){
 
-        
-        if(!empty($_GET['id'])){ 
         echo "   
         <html>
         <body>
@@ -150,7 +160,7 @@ class Edit_Item {
 
         </body>
         </html> ";
-        }
+        $this->set_data();
     }
     
     private function print_modal_tool_form(){
@@ -172,7 +182,7 @@ class Edit_Item {
         <form action='' method='post'>
         <table style='border:none;'>";
     
-        if($this->type == "reamers" || $this->type == "taps"){
+        if($this->table == "reamers" || $this->table == "taps"){
             
             echo "     
             </tr>      
@@ -190,7 +200,7 @@ class Edit_Item {
             </tr>";
         }
         
-        if($this->type == "taps"){
+        if($this->table == "taps"){
             echo "
             <tr style='background-color: #f2f2f2;'>
                 <td width=135px> Materijal: </td>  <td> <input type='text' name='material' value='". $this->get_values[0]->material ."' > </td>  
@@ -201,7 +211,7 @@ class Edit_Item {
             <td width=135px> Proizvođač: </td>  <td> <input type='text' name='name' value='". $this->get_values[0]->name ."' > </td>  
         </tr>";
         
-        if($this->type != "taps"){
+        if($this->table != "taps"){
             echo "
             <tr style='background-color: #f2f2f2;'>
                 <td> Spirala (mm): </td>  <td> <input type='text' name='cut_length' ". required_num() ."
@@ -209,7 +219,7 @@ class Edit_Item {
             </tr>";
         }
         
-        if($this->type == "reamers" || $this->type == "taps"){
+        if($this->table == "reamers" || $this->table == "taps"){
             
             echo "
             <tr style='background-color: #f2f2f2;'>
@@ -218,7 +228,7 @@ class Edit_Item {
             </tr>";
         }
         
-        if($this->type != "drills_indexable"){
+        if($this->table != "drills_indexable"){
             
             echo "
             <tr style='background-color: #f2f2f2;'>
@@ -227,7 +237,7 @@ class Edit_Item {
             </tr>";
         }
         
-        if($this->type == "drills_indexable"){
+        if($this->table == "drills_indexable"){
             
             echo "
             <tr style='background-color: #f2f2f2;'>
@@ -291,9 +301,9 @@ class Edit_Item {
         </script>
 
         </body>
-        </html>
-
-        ";              
+        </html>";
+        
+        $this->set_data();
         
     }
 

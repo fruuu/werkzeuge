@@ -23,8 +23,7 @@ try{
     else{
         echo "Example page";
     }
-    
-    
+        
 } 
 catch (Exception $ex) {   
     echo "Database setup <br><br>";

@@ -16,7 +16,6 @@ class Bolt extends List_Table{
         $this->title = $title;
         $this->set_query__columns();
         $this->set_headers();
-        $this->type = "Bolt";
         $this->table_width = "1000";
         $this->display();
         $this->print_edit = true;
@@ -28,8 +27,8 @@ class Bolt extends List_Table{
         echo "<div class=title>";
             $this->print_title();
         echo "</div>";
-        if(isset($_GET['type'])){  //open form for adding new Bolt or other
-            $this->add_item($this->type);
+        if(isset($_GET['add'])){  //open form for adding new Bolt or other
+            $this->add_item($this->screen);
         }
         else{
             if(isset($_GET['id'])){  // open modal form for editing Bolt or other
@@ -60,7 +59,7 @@ class Bolt extends List_Table{
             $this->prepare_items("grade", $value);    
             $this->title = $value;
         }
-        if(!isset($_GET['type'])){
+        if(!isset($_GET['add'])){
             $this->_display();
         }
         
@@ -80,14 +79,6 @@ class Bolt extends List_Table{
         
         $this->query_columns = array("id", "diameter", "length", "pieces", "price", "grade", "min");
     }  
-    
-    private function redirect(){
-        $this->url = strtok($_SERVER["REQUEST_URI"],'?');
-        ?>
-            <script type="text/javascript">
-                window.location = "<?php echo $this->url ?>";
-            </script>   
-        <?php
-    }
+
 
 }

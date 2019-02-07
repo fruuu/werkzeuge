@@ -15,12 +15,20 @@ function required_float(){
 
 function sanitize($data){
 
-$data = trim($data);
-$data = stripslashes($data);
-$data = htmlspecialchars($data);
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
 
-return $data;
+    return $data;
+}
 
+function redirect(){
+    $url = strtok($_SERVER["REQUEST_URI"],'?');
+    ?>
+        <script type="text/javascript">
+            window.location = "<?php echo $url ?>";
+        </script>   
+    <?php
 }
 
     

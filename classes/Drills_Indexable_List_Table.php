@@ -1,6 +1,6 @@
 <?php
 
-class Drills_Indexable_List_Table extends Drills1_List_Table{
+class Drills_Indexable_List_Table extends Drills_List_Table{
     
     
     public function __construct() {

@@ -6,11 +6,11 @@ require_once ("../header.php");
 require_once("../header_side_tools.php");
 
 
-$mill = new End_Mill_Al1_List_Table();
+$mill = new End_Mill_List_Table("Glodala za aluminij", "end_mill", 7);
 $mill->display();
 
-$mill_xl = new End_Mill_Al1_XL_List_Table();
-$mill_xl->display();
+$mill = new End_Mill_List_Table("XL Glodala za aluminij", "end_mill", 8);
+$mill->display();
 
-$mill_xxl = new End_Mill_Al1_XXL_List_Table();
-$mill_xxl->display();
+$mill = new End_Mill_List_Table("XXL Glodala za aluminij", "end_mill", 9);
+$mill->display();
