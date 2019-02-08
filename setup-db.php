@@ -34,7 +34,7 @@ try{
                     <div id='load_text' class='load_text'> Please wait... <br><br></div>
                     <div id='load' class='load'></div>
                     </html>";
-
+                sleep(8);
                 if(isset($_POST['create_db'])){
                     $mysql_class = new MySql();
 

@@ -54,6 +54,9 @@ class db{
             $this->dbh->select_db($this->db_name);
             $this->db_select_error = false;
         }
+        else{
+            return FALSE;
+        }
         
                 
     }
